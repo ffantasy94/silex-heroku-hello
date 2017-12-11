@@ -62,18 +62,18 @@ $app->post('/charge', function (Request $request) use ($app) {
 });
 
 
-$app->post('/webhook', function (Request $request) use ($app) {
-  $event = json_decode($request->getContent());
-  if ($event->type == 'source.chargeable') {
-    $source = $event->data->object;
-    $charge = \Stripe\Charge::create(array(
-      'amount' => $source->amount,
-      'currency' => $source->currency,
-      'source' => $source->id,
-      'description' => "Example Charge ",
-    ));
-  }
-  return new Response('', 200);
-});
+// $app->post('/webhook', function (Request $request) use ($app) {
+//   $event = json_decode($request->getContent());
+//   if ($event->type == 'source.chargeable') {
+//     $source = $event->data->object;
+//     $charge = \Stripe\Charge::create(array(
+//       'amount' => $source->amount,
+//       'currency' => $source->currency,
+//       'source' => $source->id,
+//       'description' => "Example Charge ",
+//     ));
+//   }
+//   return new Response('', 200);
+// });
 
 $app->run();
