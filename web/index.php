@@ -5,7 +5,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-//Stripe\Stripe::setApiKey(getenv('STRIPE_TEST_SECRET_KEY'));
+Stripe\Stripe::setApiKey(getenv('STRIPE_TEST_SECRET_KEY'));
 
 $app = new Silex\Application();
 
