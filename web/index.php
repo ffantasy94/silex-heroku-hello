@@ -20,21 +20,21 @@ $app->get('/', function() use($app) {
     return new Response('Great, your backend is set up. Now you can configure the Stripe example apps to point here.', 200);
 });
 
-// $app->post('/ephemeral_keys', function (Request $request) use ($app) {
-//   if (!isset($request->request->get('api_version'))) {
-//       return new Response('Error creating ephemeral key', 400);
-//   }
-//   try {
-//     $key = \Stripe\EphemeralKey::create(
-//       array("customer" => $request->request->get('customer_id')),
-//       array("stripe_version" => $request->request->get('api_version'))
-//     );
-//     header('Content-Type: application/json');
-//     return new Response(json_encode($key), 200);
-//   } catch (Exception $e) {
-//       return new Response('Error creating ephemeral key: '.$e, 500);
-//   }
-// });
+$app->post('/ephemeral_keys', function (Request $request) use ($app) {
+  if (!isset($request->request->get('api_version'))) {
+      return new Response('Error creating ephemeral key', 400);
+  }
+  try {
+    $key = \Stripe\EphemeralKey::create(
+      array("customer" => $request->request->get('customer_id')),
+      array("stripe_version" => $request->request->get('api_version'))
+    );
+    header('Content-Type: application/json');
+    return new Response(json_encode($key), 200);
+  } catch (Exception $e) {
+      return new Response('Error creating ephemeral key: '.$e, 500);
+  }
+});
 
 // $app->post('/charge', function (Request $request) use ($app) {
 //   try {
