@@ -4,15 +4,15 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
 
-// $app->before(function (Request $request) {
-//     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-//         $data = json_decode($request->getContent(), true);
-//         $request->request->replace(is_array($data) ? $data : array());
-//     }
-// });
+$app->before(function (Request $request) {
+    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+    }
+});
 
 $app->get('/', function() use($app) {
-    return 'Great, your backend is set up. Now you can configure the Stripe example apps to point here.';
+    return new Response('Great, your backend is set up. Now you can configure the Stripe example apps to point here.', 200);
 });
 
 $app->get('/test', function() use($app) {
